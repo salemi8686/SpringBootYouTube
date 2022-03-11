@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+
 @Controller
 @RequestMapping("/people")
 public class PeopleControllers{
@@ -18,7 +20,7 @@ public class PeopleControllers{
 
 
     @GetMapping()
-    public String index(Model model){
+    public String index(Model model) throws SQLException {
         model.addAttribute("people",personDao.index());
         return "people/index";
     }
@@ -36,7 +38,7 @@ public class PeopleControllers{
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("person") Person person){
+    public String create(@ModelAttribute("person") Person person) throws SQLException {
         personDao.save(person);
         return "redirect:/people";
     }
@@ -50,12 +52,14 @@ public class PeopleControllers{
     @PostMapping("/{id}")
     public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id){
         personDao.update(id,person);
+        System.out.println("is working!");
         return "redirect:/people";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id){
+    public String delete(@PathVariable("id") int id) throws SQLException {
         personDao.delete(id);
+        System.out.println("is working!");
         return "redirect:people";
     }
 

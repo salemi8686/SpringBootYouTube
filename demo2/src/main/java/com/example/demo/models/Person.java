@@ -3,12 +3,16 @@ package com.example.demo.models;
 public class Person {
     private int id;
     private String name;
+    private String email;
+    private int age;
 
     public Person(){}
 
-    public Person(int id,String name){
+    public Person(int id,String name,int age,String email){
         this.id = id;
         this.name = name;
+        this.age = age;
+        this.email = email;
     }
 
     public void setId(int id) {
@@ -25,5 +29,19 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setEmail(String email) { this.email = email;
+    }
+
+    public void setAge(int age) { this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
